@@ -156,7 +156,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
         
         // нужно использовать .withRenderingMode(.alwaysOriginal), иначе будет просто белый фон вместо картинки
         self.plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
-        plusPhotoButton.layer.cornerRadius = 128 / 2
+        plusPhotoButton.layer.cornerRadius = 150 / 2
         plusPhotoButton.layer.masksToBounds = true
         plusPhotoButton.imageView?.contentMode = .scaleAspectFill
         plusPhotoButton.imageView?.clipsToBounds = true

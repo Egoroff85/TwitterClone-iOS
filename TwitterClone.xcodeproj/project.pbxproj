@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0C12BF2782608D005B36F9 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C12BE2782608D005B36F9 /* UserService.swift */; };
+		5C0C12C127826B83005B36F9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C12C027826B83005B36F9 /* User.swift */; };
 		5CB1CCE62771357A00362714 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1CCE52771357A00362714 /* AppDelegate.swift */; };
 		5CB1CCE82771357A00362714 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB1CCE72771357A00362714 /* SceneDelegate.swift */; };
 		5CB1CCEF2771357E00362714 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB1CCEE2771357E00362714 /* Assets.xcassets */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C0C12BE2782608D005B36F9 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		5C0C12C027826B83005B36F9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		5CB1CCE22771357A00362714 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB1CCE52771357A00362714 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CB1CCE72771357A00362714 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		5CB1CCF92771364700362714 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5C0C12C027826B83005B36F9 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				5CB1CD1A277A52BF00362714 /* AuthService.swift */,
+				5C0C12BE2782608D005B36F9 /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -292,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C0C12BF2782608D005B36F9 /* UserService.swift in Sources */,
 				5CB1CCE62771357A00362714 /* AppDelegate.swift in Sources */,
 				5CB1CD0827713A6300362714 /* ConversationsController.swift in Sources */,
 				5CB1CD1127754D5300362714 /* Utilities.swift in Sources */,
@@ -299,6 +306,7 @@
 				5CB1CD0A27715C6E00362714 /* Extensions.swift in Sources */,
 				5CB1CD0D2775320900362714 /* LoginController.swift in Sources */,
 				5CB1CD1B277A52BF00362714 /* AuthService.swift in Sources */,
+				5C0C12C127826B83005B36F9 /* User.swift in Sources */,
 				5CB1CD002771373E00362714 /* MainTabController.swift in Sources */,
 				5CB1CD0627713A3100362714 /* NotificationsController.swift in Sources */,
 				5CB1CCE82771357A00362714 /* SceneDelegate.swift in Sources */,
