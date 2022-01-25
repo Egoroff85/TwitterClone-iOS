@@ -86,6 +86,10 @@ class UploadTweetController: UIViewController {
                 print("DEBUG: failed to upload tweet, \(error.localizedDescription)")
                 return
             }
+            // проверить кейс учитывая ассоциированное значение
+            if case .reply(let tweet) = self.config {
+                NotificationService.shared.uploadNotification(type: .reply, tweet: tweet)
+            }
             self.dismiss(animated: true, completion: nil)
         }
     }
