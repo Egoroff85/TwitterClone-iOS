@@ -9,9 +9,16 @@ import UIKit
 
 private let reuseIdentifier = "UserCell"
 
+enum ExploreControllerConfiguration {
+    case messages
+    case userSearch
+}
+
 class ExploreController: UITableViewController {
 
     // MARK: - Properties
+    
+    private let config: ExploreControllerConfiguration
     
     private var users = [User]() {
         didSet {
@@ -32,7 +39,16 @@ class ExploreController: UITableViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     
     // MARK: - Lifecycle
-
+    
+    init(config: ExploreControllerConfiguration) {
+        self.config = config
+        super.init(style: .plain)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -58,10 +74,15 @@ class ExploreController: UITableViewController {
     
     func configureUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Explore"
+        navigationItem.title = config == .messages ? "New Message" : "Explore"
         tableView.register(UserCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.rowHeight = 60
         tableView.separatorStyle = .none
+        
+        if config == .messages {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self,
+                                                               action: #selector(handleDismissal))
+        }
     }
     
     func configureSearchController() {
@@ -71,6 +92,12 @@ class ExploreController: UITableViewController {
         searchController.searchBar.placeholder = "Search for a user"
         navigationItem.searchController = searchController
         definesPresentationContext = false
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func handleDismissal() {
+        dismiss(animated: true)
     }
 }
 

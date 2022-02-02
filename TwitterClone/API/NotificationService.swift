@@ -10,23 +10,21 @@ import Firebase
 struct NotificationService {
     static let shared = NotificationService()
     
-    func uploadNotification(type: NotificationType, tweet: Tweet? = nil, user: User? = nil) {
+    func uploadNotification(toUser user: User, type: NotificationType, tweetID: String? = nil) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         var values: [String: Any] = ["timestamp": Int(NSDate().timeIntervalSince1970), "uid": uid, "type": type.rawValue]
         
-        if let tweet = tweet {
-            values["tweetID"] = tweet.tweetID
-            REF_NOTIFICATIONS.child(tweet.user.uid).childByAutoId().updateChildValues(values)
-        } else if let user = user {
-            REF_NOTIFICATIONS.child(user.uid).childByAutoId().updateChildValues(values)
+        if let tweetID = tweetID {
+            values["tweetID"] = tweetID
         }
+        
+        REF_NOTIFICATIONS.child(user.uid).childByAutoId().updateChildValues(values)
     }
     
-    func fetchNotifications(completion: @escaping([Notification]) -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+    fileprivate func getNotifications(uid: String, completion: @escaping([Notification]) -> Void) {
         var notifications = [Notification]()
-        REF_NOTIFICATIONS.child(uid).observeSingleEvent(of: .childAdded) { snapshot in
+        REF_NOTIFICATIONS.child(uid).observe(.childAdded) { snapshot in
             guard let dictionary = snapshot.value as? [String: AnyObject] else { return }
             guard let uid = dictionary["uid"] as? String else { return }
             
@@ -34,6 +32,19 @@ struct NotificationService {
                 let notification = Notification(user: user, dictionary: dictionary)
                 notifications.append(notification)
                 completion(notifications)
+            }
+        }
+    }
+    
+    func fetchNotifications(completion: @escaping([Notification]) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let notifications = [Notification]()
+        REF_NOTIFICATIONS.child(uid).observeSingleEvent(of: .value) { snapshot in
+            if !snapshot.exists() {
+                // user has no notifications
+                completion(notifications)
+            } else {
+                self.getNotifications(uid: uid, completion: completion)
             }
         }
     }

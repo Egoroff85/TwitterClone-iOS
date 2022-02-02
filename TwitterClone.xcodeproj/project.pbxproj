@@ -17,6 +17,7 @@
 		5C0C12CD27852022005B36F9 /* TweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C12CC27852022005B36F9 /* TweetViewModel.swift */; };
 		5C0C12CF27875DB0005B36F9 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C12CE27875DB0005B36F9 /* ProfileController.swift */; };
 		5C0C12D1278766EB005B36F9 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C0C12D0278766EB005B36F9 /* ProfileHeader.swift */; };
+		5C134FD327A9C48F00719638 /* EditProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C134FD227A9C48F00719638 /* EditProfileFooter.swift */; };
 		5C5E103B2798DD14006B155D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E103A2798DD14006B155D /* Notification.swift */; };
 		5C5E1069279DCD82006B155D /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E1068279DCD81006B155D /* NotificationService.swift */; };
 		5C5E106B279DEFBB006B155D /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E106A279DEFBB006B155D /* NotificationCell.swift */; };
@@ -65,6 +66,7 @@
 		5C0C12CC27852022005B36F9 /* TweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewModel.swift; sourceTree = "<group>"; };
 		5C0C12CE27875DB0005B36F9 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		5C0C12D0278766EB005B36F9 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		5C134FD227A9C48F00719638 /* EditProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileFooter.swift; sourceTree = "<group>"; };
 		5C5E103A2798DD14006B155D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		5C5E1068279DCD81006B155D /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		5C5E106A279DEFBB006B155D /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				5CD8E82527879BC000BDE7C1 /* ProfileFilterView.swift */,
 				5C5E109127A6BEF7006B155D /* EditProfileHeader.swift */,
 				5C5E109527A725C9006B155D /* EditProfileCell.swift */,
+				5C134FD227A9C48F00719638 /* EditProfileFooter.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				5CD8E8622793A4AA00BDE7C1 /* ActionSheetViewModel.swift in Sources */,
 				5C5E106B279DEFBB006B155D /* NotificationCell.swift in Sources */,
 				5C5E109427A72447006B155D /* EditProfileViewModel.swift in Sources */,
+				5C134FD327A9C48F00719638 /* EditProfileFooter.swift in Sources */,
 				5CB1CD0F277532B500362714 /* RegistrationController.swift in Sources */,
 				5CB1CD0427713A0B00362714 /* ExploreController.swift in Sources */,
 				5CD8E82627879BC000BDE7C1 /* ProfileFilterView.swift in Sources */,

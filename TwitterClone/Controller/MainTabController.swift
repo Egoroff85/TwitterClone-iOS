@@ -8,9 +8,16 @@
 import UIKit
 import Firebase
 
+enum ActionButtonConfiguration {
+    case tweet
+    case message
+}
+
 class MainTabController: UITabBarController {
     
     // MARK: - Properties
+    
+    private var buttonConfig: ActionButtonConfiguration = .tweet
     
     var user: User? {
         didSet {
@@ -33,7 +40,6 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        logUserOut()
         view.backgroundColor = .twitterBlue
         authenticateUserAndConfigureUI()
     }
@@ -63,28 +69,25 @@ class MainTabController: UITabBarController {
         }
     }
     
-    func logUserOut() {
-        do {
-            try Auth.auth().signOut()
-        } catch let error {
-            print("DEBUG: Failed to sign out with error: \(error.localizedDescription)")
-        }
-    }
-    
     // MARK: - Helpers
     
     func configureUI() {
+        self.delegate = self
         view.addSubview(actionButton)
-        actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
+        actionButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor,
+                            paddingBottom: 64, paddingRight: 16, width: 56, height: 56)
         actionButton.layer.cornerRadius = 56 / 2
     }
 
     func configureViewControllers() {
         let feed = templateNavigationController(image: UIImage(named: "home_unselected"),
                                                 rootViewController: FeedController(collectionViewLayout: UICollectionViewFlowLayout()))
-        let explore = templateNavigationController(image: UIImage(named: "search_unselected"), rootViewController: ExploreController())
-        let notifications = templateNavigationController(image: UIImage(named: "like_unselected"), rootViewController: NotificationsController())
-        let conversations = templateNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), rootViewController: ConversationsController())
+        let explore = templateNavigationController(image: UIImage(named: "search_unselected"),
+                                                   rootViewController: ExploreController(config: .userSearch))
+        let notifications = templateNavigationController(image: UIImage(named: "like_unselected"),
+                                                         rootViewController: NotificationsController())
+        let conversations = templateNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"),
+                                                         rootViewController: ConversationsController())
         
         viewControllers = [feed, explore, notifications, conversations]
     }
@@ -99,11 +102,29 @@ class MainTabController: UITabBarController {
     // MARK: - Selectors
     
     @objc func actionButtonTapped() {
-        guard let user = user else {
-            return
+        guard let user = user else { return }
+        let controller: UIViewController
+        
+        switch buttonConfig {
+        case .tweet:
+            controller = UploadTweetController(user: user, config: .tweet)
+        case .message:
+            controller = ExploreController(config: .messages)
         }
-        let nav = UINavigationController(rootViewController: UploadTweetController(user: user, config: .tweet))
+
+        let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+
+extension MainTabController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let index = viewControllers?.firstIndex(of: viewController)
+        let image = index == 3 ? #imageLiteral(resourceName: "mail") : #imageLiteral(resourceName: "new_tweet")
+        actionButton.setImage(image, for: .normal)
+        buttonConfig = index == 3 ? .message : .tweet
     }
 }

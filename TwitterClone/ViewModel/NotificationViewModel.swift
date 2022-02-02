@@ -34,7 +34,7 @@ struct NotificationViewModel {
             return " replied to your tweet"
         case .retweet:
             return " retweeted your tweet"
-        case .menttion:
+        case .mention:
             return " mentioned you in a tweet"
         }
     }

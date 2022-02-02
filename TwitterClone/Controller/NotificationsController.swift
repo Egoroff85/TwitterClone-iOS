@@ -48,17 +48,6 @@ class NotificationsController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
     }
     
-    func checkIfUserIsFollowed() {
-        for (index, notification) in self.notifications.enumerated() {
-            if case .follow = notification.type {
-                let user = notification.user
-                UserService.shared.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
-                    self.notifications[index].user.isFollowed = isFollowed
-                }
-            }
-        }
-    }
-    
     // MARK: - Selectors
     
     @objc func handleRefresh() {
@@ -73,6 +62,19 @@ class NotificationsController: UITableViewController {
             self.refreshControl?.endRefreshing()
             self.notifications = notifications
             self.checkIfUserIsFollowed()
+        }
+    }
+    
+    func checkIfUserIsFollowed() {
+        guard !notifications.isEmpty else { return }
+        notifications.forEach { notification in
+            guard case .follow = notification.type else { return }
+            let user = notification.user
+            UserService.shared.checkIfUserIsFollowed(uid: user.uid) { isFollowed in
+                if let index = self.notifications.firstIndex(where: { $0.user.uid == notification.user.uid }) {
+                    self.notifications[index].user.isFollowed = isFollowed
+                }
+            }
         }
     }
 }
